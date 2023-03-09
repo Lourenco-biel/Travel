@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.21ea2d95.css",
+    "main.js": "/static/js/main.6a193f37.js",
+    "static/js/787.32501b87.chunk.js": "/static/js/787.32501b87.chunk.js",
+    "static/media/person-icon.svg": "/static/media/person-icon.f363218e1c26864e54ba.svg",
+    "static/media/cool-background.svg": "/static/media/cool-background.a51966c432de3157b699.svg",
+    "static/media/airplane-icon.svg": "/static/media/airplane-icon.4b557099b7349f94cf24.svg",
+    "static/media/location-icon.svg": "/static/media/location-icon.171f7c9fb854dc9b2bb5.svg",
+    "static/media/airplane-icon-2.svg": "/static/media/airplane-icon-2.328fa04a19cfb9b8977a.svg",
+    "index.html": "/index.html",
+    "static/media/no-photo.svg": "/static/media/no-photo.031afd942ffec6e2383782cf67a80792.svg",
+    "static/media/Icon=dollar-sign.svg": "/static/media/Icon=dollar-sign.a90f501ccacd9f89cc6d.svg",
+    "static/media/about-icon.svg": "/static/media/about-icon.f585f162d3fa178be158.svg",
+    "static/media/Icon=x.svg": "/static/media/Icon=x.dd287d17518452871104.svg",
+    "static/media/arrow-down.svg": "/static/media/arrow-down.579c3644ad4e4dfc0c9e.svg",
+    "main.21ea2d95.css.map": "/static/css/main.21ea2d95.css.map",
+    "main.6a193f37.js.map": "/static/js/main.6a193f37.js.map",
+    "787.32501b87.chunk.js.map": "/static/js/787.32501b87.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.21ea2d95.css",
+    "static/js/main.6a193f37.js"
+  ]
+}
