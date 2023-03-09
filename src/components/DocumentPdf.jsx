@@ -73,8 +73,8 @@ const MyDocument = ({ data, total, user }) => {
                                 <Text style={styles.cardTitle}>Local: {item.name}</Text>
                                 <Text style={styles.cardText}>Sobre:  {item.description}</Text>
                                 <Text style={styles.cardText}>Localização:  {item.location}</Text>
-                                <Text style={styles.cardText}>Data:  {item.date}</Text>
-                                <Text style={styles.cardText}>Horas:  {item.hours}</Text>
+                                <Text style={styles.cardText}>Data:  {item.date ? item.date : "Indefinido"}</Text>
+                                <Text style={styles.cardText}>Horas:  {item.hours ? item.hours : 'Indefinido'}</Text>
                                 <Text style={styles.cardText}>Custo:  {formatCurrency(item.cost)}</Text>
                             </View>
                         </View>

@@ -269,7 +269,7 @@ body {
   background-color: #ffffff;
   margin: auto;
   border-radius: 4px;
-  padding: 34px 30px 0 30px; 
+  padding: 34px 30px 0 30px;
 }
 
 .modal-body {
@@ -282,7 +282,11 @@ body {
   z-index: 1;
 }
 
-.modal-body>div{
+.modal-body::-webkit-scrollbar {
+  width: 0px;
+}
+
+.modal-body>div {
   height: 550px;
   padding: 20px 0;
 }
