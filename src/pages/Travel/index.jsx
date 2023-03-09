@@ -168,8 +168,6 @@ function Travel(props) {
                                 <input onChange={(e) => setDate(e.target.value)} className="input" type='date' />
                                 <p>Qual horario??</p>
                                 <input onChange={(e) => setHours(e.target.value)} className="input" type='time' />
-
-
                             </div>
                         </div>
                         <div className="modal-footer">
