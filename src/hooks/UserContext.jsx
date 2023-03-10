@@ -3,13 +3,14 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const UserContext = createContext({})
 
-export const UserProvider = ( props) => {
+export const UserProvider = (props) => {
   const [userData, setUserData] = useState()
 
   const putUserData = async (userInfo) => {
     setUserData(userInfo)
 
     await localStorage.setItem('myUser', JSON.stringify(userInfo))
+
   }
 
   useEffect(() => {

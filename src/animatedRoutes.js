@@ -42,7 +42,7 @@ export default function MyRoutes() {
                 <header className="header">
                     <div className='person-icon'></div>
                     <div className='header-location'>
-                        {userData && userData.dados && userData.dados.length !== 0 ? userData.dados.map((user) => {
+                        {userData && userData.user && userData.user.length !== 0 ? userData.user.map((user) => {
                             return (
                                 <>
                                     <p>{user ? user.location : 'Sem local'}</p>

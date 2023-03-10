@@ -7,13 +7,14 @@ export const ObjectProvider = (props) => {
 
     useEffect(() => {
         const loadTotalData = async () => {
-            const objectInfo = await localStorage.getItem('meuObjeto')
+            const myObject = await localStorage.getItem('meuObjeto')
 
-            if (objectInfo) {
-                setObjectData(JSON.parse(objectInfo))
+            if (myObject) {
+                setObjectData(JSON.parse(myObject));
             }
         }
         loadTotalData()
+        console.log('ola', objectData)
     }, [])
 
     const updateLocalStorage = async (objectInfo) => {
@@ -29,7 +30,6 @@ export const ObjectProvider = (props) => {
         const newCart = {}
         newCart.dados = objectData.dados.filter((prd) => prd.id !== productId)
         setObjectData(newCart)
-        console.log('NOVO', newCart)
         await localStorage.setItem("meuObjeto", JSON.stringify(newCart));
     }
 

@@ -14,6 +14,7 @@ export const TotalProvider = (props) => {
         await localStorage.setItem('TotalPrice', JSON.stringify(totalInfo))
 
     }
+
     useEffect(() => {
         const loadTotalData = async () => {
             const totalInfo = await localStorage.getItem('TotalPrice')
@@ -23,16 +24,20 @@ export const TotalProvider = (props) => {
             }
         }
         loadTotalData()
-
-        let meuObjeto = JSON.parse(localStorage.getItem("meuObjeto"))
-        const sumAllItems = meuObjeto.dados.reduce((acc, current) => {
-            return parseInt(current.cost) + acc
-        }, 0)
-        putTotalData(sumAllItems)
-    }, [objectData])
+        const loadPrice = async () => {
+            if (localStorage.getItem("meuObjeto")) {
+                let meuObjeto = JSON.parse(localStorage.getItem("meuObjeto"))
+                const sumAllItems = await meuObjeto.dados.reduce((acc, current) => {
+                    return parseInt(current.cost) + acc
+                }, 0)
+                putTotalData(sumAllItems)
+            }
+        }
+        loadPrice()
+    }, [objectData, totalData])
 
     return (
-        <TotalContext.Provider value={{ putTotalData, totalData , setTotalData}}>
+        <TotalContext.Provider value={{ putTotalData, totalData, setTotalData }}>
             {props.children}
         </TotalContext.Provider>
     )

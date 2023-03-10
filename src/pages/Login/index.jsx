@@ -2,7 +2,11 @@ import '../../assets/index.scss';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/UserContext'
+
+
+import { useObject } from '../../hooks/ObjectContext';
+import { useTotal } from '../../hooks/PriceContext';
+import { useUser } from '../../hooks/UserContext';
 
 function Login(props) {
   const [location, setLocation] = useState('')
@@ -10,14 +14,17 @@ function Login(props) {
   const [name, setName] = useState('')
   const [disabled, setDisabled] = useState(false)
   const navigate = useNavigate()
+
+
+  const { putObjectData, objectData } = useObject()
   const { putUserData } = useUser()
 
-useEffect(()=>{
-if(localStorage.getItem('myUser')){
-  navigate('/pages/roteiros')
-}
+  useEffect(() => {
+    if (localStorage.getItem('myUser')) {
+      navigate('/pages/roteiros')
+    }
+  }, [objectData])
 
-},[])
   function CreadtedTravel() {
     if (name.length <= 0 && destination.length <= 0 && location.length <= 0) {
       props.notify('Prencha os dados')
@@ -30,8 +37,8 @@ if(localStorage.getItem('myUser')){
     } else {
       setDisabled(false)
       let myUser = JSON.parse(localStorage.getItem("myUser")) || {};
-      myUser.dados = myUser.dados || [];
-      myUser.dados.push({
+      myUser.user = myUser.user || [];
+      myUser.user.push({
         name: name,
         location: location,
         destination: destination
@@ -40,6 +47,7 @@ if(localStorage.getItem('myUser')){
       props.successNotify('Seja Bem vindo!')
       navigate('/pages/roteiros')
     }
+
   }
 
   return (
@@ -62,7 +70,20 @@ if(localStorage.getItem('myUser')){
           <input className='input' onChange={(e) => setLocation(e.target.value)} />
           <p>Qual é o seu destino?</p>
           <input className='input' onChange={(e) => setDestination(e.target.value)} />
+
           <button className='button' onClick={() => CreadtedTravel()} disabled={disabled ? true : false}>Proximo</button>
+          <p>Ou Importe seu Json</p>
+          <input className='' accept='application/json' type='file' onChange={(event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              const json = JSON.parse(event.target.result);
+              putObjectData(json);
+              putUserData(json);
+            };
+            reader.readAsText(file);
+          }} />
+
         </div>
       </div>
     </motion.div>

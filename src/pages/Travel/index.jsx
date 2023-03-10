@@ -11,6 +11,7 @@ import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
 import DocumentPdf from '../../components/DocumentPdf';
 import formatCurrency from "../../utils/formatCurrency";
+
 function Travel(props) {
     const [userImage, setUserImage] = useState(null);
     const [name, setName] = useState('');
@@ -25,6 +26,10 @@ function Travel(props) {
     const { putTotalData, totalData } = useTotal()
     const { userData } = useUser()
 
+    useEffect(() => {
+        console.log(objectData)
+        console.log('NAME', name)
+    }, [name])
 
 
     function CreadtedTravel() {
@@ -59,19 +64,47 @@ function Travel(props) {
                 hours: hours,
                 status: 'confirm'
             });
-            putObjectData(meuObjeto)
             const sumAllItems = meuObjeto.dados.reduce((acc, current) => {
                 return parseInt(current.cost) + acc
             }, 0)
+
             putTotalData(sumAllItems)
+            putObjectData(meuObjeto)
+            clearInputStates()
             $('#modal').toggle()
             props.successNotify('Destino adicionado!')
         }
     }
 
+    function clearInputStates() {
+        setDate('')
+        setDescription("")
+        setHours('')
+        setLocation('')
+        setUserImage('')
+        setPrice(0)
+        setName('')
+    }
+
     async function handleDownload(data, total, user) {
         const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
         saveAs(blob, 'meu_roteiro.pdf');
+
+        const jsonObject = {
+            dados: data,
+            user: user,
+            total
+        };
+
+        const jsonString = JSON.stringify(jsonObject, null, 2);
+        const jsonBlob = new Blob([jsonString], { type: "application/json" });
+        const url = URL.createObjectURL(jsonBlob);
+        const link = document.createElement('a')
+        link.href = url;
+        link.download = "file.json";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     function Logout() {
@@ -128,7 +161,7 @@ function Travel(props) {
                 {objectData && objectData.dados && objectData.dados.length !== 0 ?
                     <>
                         <button className="button" onClick={() => $('#modal').toggle()}>Adicionar destino</button>
-                        <button className="button download" onClick={() => handleDownload(objectData.dados, totalData, userData.dados)}>Baixar roteiro</button>
+                        <button className="button download" onClick={() => handleDownload(objectData.dados, totalData, userData.user)}>Baixar roteiro</button>
                         <button className="button logout" onClick={() => Logout()}>Sair</button>
                     </>
                     : ''}
