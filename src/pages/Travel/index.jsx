@@ -10,7 +10,7 @@ import { useUser } from '../../hooks/UserContext'
 import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
 import DocumentPdf from '../../components/DocumentPdf';
-
+import formatCurrency from "../../utils/formatCurrency";
 function Travel(props) {
     const [userImage, setUserImage] = useState(null);
     const [name, setName] = useState('');
@@ -25,11 +25,8 @@ function Travel(props) {
     const { putTotalData, totalData } = useTotal()
     const { userData } = useUser()
 
-    useEffect(() => {
-        console.log('desdseda', objectData)
-    }, [objectData])
 
-    
+
     function CreadtedTravel() {
         if (name.length <= 1 && location.length <= 1 && description.length <= 1 && price === 0) {
             props.notify('Prencha os dados')
@@ -45,7 +42,6 @@ function Travel(props) {
         } else if (price === 0) {
             props.notify('Prencha o valor do passeio')
         } else {
-
             let meuObjeto = JSON.parse(localStorage.getItem("meuObjeto")) || {};
             meuObjeto.dados = meuObjeto.dados || [];
             let idCounter = 1;
@@ -64,11 +60,10 @@ function Travel(props) {
                 status: 'confirm'
             });
             putObjectData(meuObjeto)
-            let sum = 0;
-            for (let i = 0; i < meuObjeto.dados.length; i++) {
-                sum += parseInt(meuObjeto.dados[i].cost);
-            }
-            putTotalData(sum)
+            const sumAllItems = meuObjeto.dados.reduce((acc, current) => {
+                return parseInt(current.cost) + acc
+            }, 0)
+            putTotalData(sumAllItems)
             $('#modal').toggle()
             props.successNotify('Destino adicionado!')
         }
@@ -96,7 +91,7 @@ function Travel(props) {
             exit={{ opacity: 0 }}
         >
             <div className="travel">
-                <h2 style={{ marginTop: "90px" }}>{objectData && objectData.dados && objectData.dados.length !== 0 ? 'Agora vamos aproveitar' : 'Monte seu roteiro'}</h2>
+                <h2 style={{ marginTop: "90px" }}>{objectData && objectData.dados && objectData.dados.length !== 0 ? 'Oque está esperando? bora curtir!' : 'Monte seu roteiro'}</h2>
                 <div className="travel-cards">
                     {objectData && objectData.dados && objectData.dados.length !== 0 ? objectData.dados.map((travel, id) => {
                         return (
@@ -113,10 +108,10 @@ function Travel(props) {
                                         <p><div className="airplane-icon"></div> {travel.name}</p>
                                         <p><div className="about-icon"></div> {travel.description}</p>
                                         <p><div className="location-icon"></div>{travel.location}</p>
-                                        <p><div className="dollar-icon"></div>{travel.cost}</p>
+                                        <p><div className="dollar-icon"></div>{formatCurrency(travel.cost)}</p>
                                     </div>
-{/*                                     <button className="button logout" onClick={() => deleteObjects(travel.id)}>Deletar</button>
- */}                                </div>
+                                    <button className="button logout" onClick={() => deleteObjects(travel.id)}>Deletar</button>
+                                </div>
                                 <div className="arrow-down-icon " style={{ justifyContent: 'center', display: 'flex' }}></div>
                             </div>
 

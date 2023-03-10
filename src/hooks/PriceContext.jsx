@@ -1,11 +1,13 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
+import { useObject } from '../hooks/ObjectContext';
 
 const TotalContext = createContext({})
 
 export const TotalProvider = (props) => {
     const [totalData, setTotalData] = useState()
+    const { objectData } = useObject()
 
     const putTotalData = async (totalInfo) => {
         setTotalData(totalInfo)
@@ -21,10 +23,16 @@ export const TotalProvider = (props) => {
             }
         }
         loadTotalData()
-    }, [])
-    
+
+        let meuObjeto = JSON.parse(localStorage.getItem("meuObjeto"))
+        const sumAllItems = meuObjeto.dados.reduce((acc, current) => {
+            return parseInt(current.cost) + acc
+        }, 0)
+        putTotalData(sumAllItems)
+    }, [objectData])
+
     return (
-        <TotalContext.Provider value={{ putTotalData, totalData }}>
+        <TotalContext.Provider value={{ putTotalData, totalData , setTotalData}}>
             {props.children}
         </TotalContext.Provider>
     )

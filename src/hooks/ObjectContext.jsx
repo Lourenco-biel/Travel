@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-
 const ObjectContext = createContext({})
 
 export const ObjectProvider = (props) => {
-    const [objectData, setObjectData] = useState([])
+    const [objectData, setObjectData] = useState({})
 
     useEffect(() => {
         const loadTotalData = async () => {
@@ -27,13 +26,14 @@ export const ObjectProvider = (props) => {
     }
 
     const deleteObjects = async (productId) => {
-        const newCart = objectData.dados.filter((prd) => prd.id !== productId)
+        const newCart = {}
+        newCart.dados = objectData.dados.filter((prd) => prd.id !== productId)
         setObjectData(newCart)
         console.log('NOVO', newCart)
         await localStorage.setItem("meuObjeto", JSON.stringify(newCart));
     }
 
- 
+
 
     return (
         <ObjectContext.Provider value={{ putObjectData, deleteObjects, objectData }}>
