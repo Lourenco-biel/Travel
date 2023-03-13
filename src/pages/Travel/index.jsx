@@ -82,8 +82,8 @@ function Travel(props) {
     }
 
     async function handleDownload(data, total, user) {
-        const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
-        saveAs(blob, 'meu_roteiro.pdf');
+     /*    const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
+        saveAs(blob, 'meu_roteiro.pdf'); */
 
         const jsonObject = {
             dados: data,
