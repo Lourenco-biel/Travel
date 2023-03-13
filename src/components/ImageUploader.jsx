@@ -26,7 +26,6 @@ class Drawer {
         const imageRatio = this.image.width / this.image.height;
         this.context.drawImage(this.image, 0, 0, this.canvas.width, this.canvas.width / imageRatio);
     }
-
     setImage(src) {
         this.context.fillStyle = "#f7f7f7";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);

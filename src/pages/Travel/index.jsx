@@ -76,7 +76,7 @@ function Travel(props) {
         setDescription("")
         setHours('')
         setLocation('')
-        setUserImage('')
+        setUserImage(null)
         setPrice(0)
         setName('')
     }
@@ -185,19 +185,19 @@ function Travel(props) {
                         <div className="modal-body">
                             <div>
                                 <p>Posso ver este lugar ?</p>
-                                <ImageUploader setUserImage={(base64) => setUserImage(base64)} image={userImage} />
+                                <ImageUploader value={userImage} onChange={(base64) => setUserImage(base64)} image={userImage} />
                                 <p>Qual o nome de paraiso?</p>
-                                <input onChange={(e) => setName(e.target.value)} className="input" type='text' />
+                                <input value={name} onChange={(e) => setName(e.target.value)} className="input" type='text' />
                                 <p>Me fala um pouco sobre, pfv!</p>
-                                <textarea onChange={(e) => setDescription(e.target.value)} className="textarea" />
+                                <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="textarea" />
                                 <p> Aonde fica?</p>
-                                <input onChange={(e) => setLocation(e.target.value)} className="input" type='text' />
+                                <input value={location} onChange={(e) => setLocation(e.target.value)} className="input" type='text' />
                                 <p>Quanto vamos gastar em??</p>
-                                <input onChange={(e) => setPrice(e.target.value)} className="input" type='number' />
+                                <input value={price} onChange={(e) => setPrice(e.target.value)} className="input" type='number' />
                                 <p>Qual dia ??</p>
-                                <input onChange={(e) => setDate(e.target.value)} className="input" type='date' />
+                                <input value={date} onChange={(e) => setDate(e.target.value)} className="input" type='date' />
                                 <p>Qual horario??</p>
-                                <input onChange={(e) => setHours(e.target.value)} className="input" type='time' />
+                                <input value={hours} onChange={(e) => setHours(e.target.value)} className="input" type='time' />
                             </div>
                         </div>
                         <div className="modal-footer">
