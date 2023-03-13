@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 import { useObject } from '../../hooks/ObjectContext';
-import { useTotal } from '../../hooks/PriceContext';
 import { useUser } from '../../hooks/UserContext';
 
 function Login(props) {

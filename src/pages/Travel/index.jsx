@@ -26,11 +26,6 @@ function Travel(props) {
     const { putTotalData, totalData } = useTotal()
     const { userData } = useUser()
 
-    useEffect(() => {
-        console.log(objectData)
-        console.log('NAME', name)
-    }, [name])
-
 
     function CreadtedTravel() {
         if (name.length <= 1 && location.length <= 1 && description.length <= 1 && price === 0) {

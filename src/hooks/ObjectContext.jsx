@@ -14,7 +14,6 @@ export const ObjectProvider = (props) => {
             }
         }
         loadTotalData()
-        console.log('ola', objectData)
     }, [])
 
     const updateLocalStorage = async (objectInfo) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import { notify, successNotify } from './utils/notifications';
 import formatCurrency from './utils/formatCurrency';
