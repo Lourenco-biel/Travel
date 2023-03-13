@@ -185,7 +185,7 @@ function Travel(props) {
                         <div className="modal-body">
                             <div>
                                 <p>Posso ver este lugar ?</p>
-                                <ImageUploader value={userImage} onChange={(base64) => setUserImage(base64)} image={userImage} />
+                                <ImageUploader  setUserImage={(base64) => setUserImage(base64)} image={userImage} />
                                 <p>Qual o nome de paraiso?</p>
                                 <input value={name} onChange={(e) => setName(e.target.value)} className="input" type='text' />
                                 <p>Me fala um pouco sobre, pfv!</p>
