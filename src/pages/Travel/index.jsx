@@ -82,24 +82,29 @@ function Travel(props) {
     }
 
     async function handleDownload(data, total, user) {
-        const jsonObject = {
-            dados: data,
-            user: user,
-            total
-        };
-
-        const jsonString = JSON.stringify(jsonObject, null, 2);
-        const jsonBlob = new Blob([jsonString], { type: "application/json" });
-        const url = URL.createObjectURL(jsonBlob);
-        const link = document.createElement('a')
-        link.href = url;
-        link.download = "file.json";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
         const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
         saveAs(blob, 'meu_roteiro.pdf');
+
+
+        setTimeout(() => {
+            const jsonObject = {
+                dados: data,
+                user: user,
+                total
+            };
+
+            const jsonString = JSON.stringify(jsonObject, null, 2);
+            const jsonBlob = new Blob([jsonString], { type: "application/json" });
+            const url = URL.createObjectURL(jsonBlob);
+            const link = document.createElement('a')
+            link.href = url;
+            link.download = "file.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, 1000);
+
+
     };
 
     function Logout() {
