@@ -82,9 +82,6 @@ function Travel(props) {
     }
 
     async function handleDownload(data, total, user) {
-     /*    const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
-        saveAs(blob, 'meu_roteiro.pdf'); */
-
         const jsonObject = {
             dados: data,
             user: user,
@@ -100,6 +97,9 @@ function Travel(props) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
+        saveAs(blob, 'meu_roteiro.pdf');
     };
 
     function Logout() {
@@ -138,14 +138,16 @@ function Travel(props) {
                                         <p><div className="location-icon"></div>{travel.location}</p>
                                         <p><div className="dollar-icon"></div>{formatCurrency(travel.cost)}</p>
                                     </div>
-                                    <button className="button logout" onClick={() => deleteObjects(travel.id)}>Deletar</button>
+                                    <div className="travel-buttons">
+                                        <button className="button logout" onClick={() => deleteObjects(travel.id)}>Deletar</button>
+                                    </div>
                                 </div>
                                 <div className="arrow-down-icon " style={{ justifyContent: 'center', display: 'flex' }}></div>
                             </div>
 
                         )
                     }) :
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div className="travel-buttons">
                             <button className="button"
                                 onClick={() => $('#modal').toggle()}
                             >Adicionar destino</button>
@@ -154,11 +156,11 @@ function Travel(props) {
                     }
                 </div>
                 {objectData && objectData.dados && objectData.dados.length !== 0 ?
-                    <>
+                    <div className="travel-buttons">
                         <button className="button" onClick={() => $('#modal').toggle()}>Adicionar destino</button>
                         <button className="button download" onClick={() => handleDownload(objectData.dados, totalData, userData.user)}>Baixar roteiro</button>
                         <button className="button logout" onClick={() => Logout()}>Sair</button>
-                    </>
+                    </div>
                     : ''}
             </div>
             <div className="modal" id='modal' style={{

@@ -70,7 +70,8 @@ body {
 }
 
 .travel-card {
-  width: 310px;
+  width: 277px;
+  height: auto;
   min-height: 354px;
   display: flex;
   flex-direction: column;
@@ -130,7 +131,7 @@ body {
 }
 
 .travel-path {
-  width: 312px;
+  width: 277px;
 }
 
 .location-icon {
@@ -205,15 +206,26 @@ body {
   min-height: 107px;
 }
 
+.travel-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 0 0 23px 0;
+
+}
+
 .button {
   border: none;
   border-radius: 10px;
   background: #ffff;
   color: #58baff;
-  width: auto;
+  width: 70%;
   height: 30px;
   border: 2px solid #58baff;
-  margin: 28px;
   cursor: pointer;
   font-size: 16px;
   font-style: oblique;
@@ -266,6 +278,7 @@ body {
 
 .modal-content {
   height: 71%;
+  width: auto;
   background-color: #ffffff;
   margin: auto;
   border-radius: 4px;
@@ -278,7 +291,6 @@ body {
   justify-content: center;
   gap: 3px;
   overflow: auto;
-  padding: 10px 0;
   height: 84%;
   z-index: 1;
 }
@@ -288,8 +300,7 @@ body {
 }
 
 .modal-body>div {
-  height: 550px;
-  padding: 20px 0;
+  height: 100%;
 }
 
 
