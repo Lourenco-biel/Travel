@@ -5,7 +5,6 @@ body {
 
 .page-content {
   position: relative;
-  background-color: #F9F9F9;
   box-sizing: border-box;
 }
 
@@ -266,10 +265,11 @@ body {
 }
 
 .modal-content {
+  height: 71%;
   background-color: #ffffff;
   margin: auto;
   border-radius: 4px;
-  padding: 34px 30px 0 30px;
+  padding: 34px 30px 34px;
 }
 
 .modal-body {
@@ -278,6 +278,7 @@ body {
   justify-content: center;
   gap: 3px;
   overflow: auto;
+  padding: 10px 0;
   height: 84%;
   z-index: 1;
 }
