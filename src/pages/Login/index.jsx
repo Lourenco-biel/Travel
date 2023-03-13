@@ -69,8 +69,10 @@ function Login(props) {
           <input className='input' onChange={(e) => setLocation(e.target.value)} />
           <p>Qual é o seu destino?</p>
           <input className='input' onChange={(e) => setDestination(e.target.value)} />
+          <div className='travel-buttons' style={{margin:'15px 0'}}>
+            <button className='button' onClick={() => CreadtedTravel()} disabled={disabled ? true : false}>Proximo</button>
+          </div>
 
-          <button className='button' onClick={() => CreadtedTravel()} disabled={disabled ? true : false}>Proximo</button>
           <p>Ou Importe seu Json</p>
           <input className='' accept='application/json' type='file' onChange={(event) => {
             const file = event.target.files[0];
