@@ -11,6 +11,7 @@ import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
 import DocumentPdf from '../../components/DocumentPdf';
 import formatCurrency from "../../utils/formatCurrency";
+import InputSugest from '../../components/InputSugest';
 
 function Travel(props) {
     const [userImage, setUserImage] = useState(null);
@@ -143,7 +144,7 @@ function Travel(props) {
                                         <p><div className="location-icon"></div>{travel.location}</p>
                                         <p><div className="dollar-icon"></div>{formatCurrency(travel.cost)}</p>
                                     </div>
-                                    <div className="travel-buttons">
+                                    <div className="travel-buttons Omg">
                                         <button className="button logout" onClick={() => deleteObjects(travel.id)}>Deletar</button>
                                     </div>
                                 </div>
@@ -183,7 +184,7 @@ function Travel(props) {
                             <div className="airplane-icon" style={{ display: 'flex' }}></div>
                         </div>
                         <div className="modal-body">
-                            <div>
+                            <div htmlFor="endereco">
                                 <p>Posso ver este lugar ?</p>
                                 <ImageUploader  setUserImage={(base64) => setUserImage(base64)} image={userImage} />
                                 <p>Qual o nome de paraiso?</p>
@@ -191,6 +192,7 @@ function Travel(props) {
                                 <p>Me fala um pouco sobre, pfv!</p>
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="textarea" />
                                 <p> Aonde fica?</p>
+                                <InputSugest id="endereco"  onChange={setLocation}/>
                                 <input value={location} onChange={(e) => setLocation(e.target.value)} className="input" type='text' />
                                 <p>Quanto vamos gastar em??</p>
                                 <input value={price} onChange={(e) => setPrice(e.target.value)} className="input" type='number' />
