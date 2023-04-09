@@ -100,6 +100,7 @@ body {
   border-radius: 8px;
   border: none;
   gap: 8px;
+  background-color: rgb(173 221 255 / 42%);
 
   &.cancel {
     color: #D31515;
@@ -128,7 +129,7 @@ body {
 }
 
 .travel-path {
-  width: 277px;
+  max-width: 277px;
 }
 
 .location-icon {
@@ -279,7 +280,7 @@ body {
 
 .modal-content {
   height: 71%;
-  width: auto;
+  width: 70%;
   background-color: #ffffff;
   margin: auto;
   border-radius: 4px;
@@ -306,7 +307,7 @@ body {
 
 
 .modal-body>div>p {
-  margin: 8px 0 0 0;
+  margin: 14px 0 0 0;
   font-size: 16px;
   font-weight: 400;
   font-style: oblique;
@@ -395,6 +396,37 @@ body {
   max-width: 140px;
   max-height: 140px;
 }
+
+.imagem-Google {
+  width: auto;
+  height: auto;
+  max-height: 260px;
+  border-radius: 4px;
+  padding: 20px 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px dashed black;
+  cursor: pointer;
+  box-sizing: border-box;
+  z-index: 2;
+  overflow: auto;
+}
+
+.css-13cymwt-control {
+  width: 100%;
+}
+
+
+
+.css-Inmdiq5-menu {
+  width: 14rem;
+}
+
+
 
 
 //input

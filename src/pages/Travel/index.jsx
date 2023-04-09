@@ -12,6 +12,8 @@ import { pdf } from '@react-pdf/renderer';
 import DocumentPdf from '../../components/DocumentPdf';
 import formatCurrency from "../../utils/formatCurrency";
 import InputSugest from '../../components/InputSugest';
+import Location from "../../components/Location";
+import GooglePlacesComponent from "../../components/Images";
 
 function Travel(props) {
     const [userImage, setUserImage] = useState(null);
@@ -27,6 +29,11 @@ function Travel(props) {
     const { putTotalData, totalData } = useTotal()
     const { userData } = useUser()
 
+    const [reset, setReset] = useState(false);
+
+    const handleLocationReset = () => {
+        setReset(false);
+      }
 
     function CreadtedTravel() {
         if (name.length <= 1 && location.length <= 1 && description.length <= 1 && price === 0) {
@@ -73,6 +80,7 @@ function Travel(props) {
     }
 
     function clearInputStates() {
+        setReset(true);
         setDate('')
         setDescription("")
         setHours('')
@@ -81,6 +89,20 @@ function Travel(props) {
         setPrice(0)
         setName('')
     }
+
+    const DeleteLocatioChange = (newValue) => {
+        setLocation(newValue);
+    };
+    const DeleteImageChange = (newValue) => {
+        setUserImage(newValue);
+    };
+
+    const handleLocatioChange = (newValue) => {
+        setLocation(newValue);
+    };
+    const handleImageChange = (newValue) => {
+        setUserImage(newValue);
+    };
 
     async function handleDownload(data, total, user) {
         const blob = await pdf(<DocumentPdf data={data} total={total} user={user} />).toBlob();
@@ -125,7 +147,7 @@ function Travel(props) {
             exit={{ opacity: 0 }}
         >
             <div className="travel">
-                <h2 style={{ marginTop: "90px" }}>{objectData && objectData.dados && objectData.dados.length !== 0 ? 'Oque está esperando? bora curtir!' : 'Monte seu roteiro'}</h2>
+                <h2 style={{ marginTop: "90px" }}>{objectData && objectData.dados && objectData.dados.length !== 0 ? '' : 'Monte seu roteiro'}</h2>
                 <div className="travel-cards">
                     {objectData && objectData.dados && objectData.dados.length !== 0 ? objectData.dados.map((travel, id) => {
                         return (
@@ -133,7 +155,7 @@ function Travel(props) {
                                 <div key={`travel-card-${id}`} className='travel-card'>
                                     <span className='travel-status'>
                                         <span># {id + 1}</span>
-                                        <span className='waiting'>
+                                        <span >
                                             {travel.date && travel.hours ? `${travel.date} - ${travel.hours}` : 'Dia e hora indefinido'}
                                         </span>
                                     </span>
@@ -186,14 +208,13 @@ function Travel(props) {
                         <div className="modal-body">
                             <div htmlFor="endereco">
                                 <p>Posso ver este lugar ?</p>
-                                <ImageUploader  setUserImage={(base64) => setUserImage(base64)} image={userImage} />
+                                <GooglePlacesComponent onValueChange={handleImageChange} reset={reset} onReset={handleLocationReset}  />
                                 <p>Qual o nome de paraiso?</p>
                                 <input value={name} onChange={(e) => setName(e.target.value)} className="input" type='text' />
                                 <p>Me fala um pouco sobre, pfv!</p>
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="textarea" />
-                                <p> Aonde fica?</p>
-                                <InputSugest id="endereco"  onChange={setLocation}/>
-                                <input value={location} onChange={(e) => setLocation(e.target.value)} className="input" type='text' />
+                                <p>Localização?</p>
+                                <Location onValueChange={handleLocatioChange} reset={reset} onReset={handleLocationReset} />
                                 <p>Quanto vamos gastar em??</p>
                                 <input value={price} onChange={(e) => setPrice(e.target.value)} className="input" type='number' />
                                 <p>Qual dia ??</p>
